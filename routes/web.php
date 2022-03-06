@@ -7,8 +7,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/download', function () {
-    $userExport = new UsersExport;
+Route::get('/download', function (UsersExport $userExport) {
+    $userExport->store('user.xlsx', 'public');
 
-    return $userExport->download('user.xlsx');
+    return 'Guardado Exitoso';
 });
