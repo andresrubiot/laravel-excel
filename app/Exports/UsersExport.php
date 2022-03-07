@@ -3,18 +3,19 @@
 namespace App\Exports;
 
 use App\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 
-class UsersExport implements FromCollection
+class UsersExport implements FromQuery, ShouldQueue
 {
     use Exportable;
 
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    public function query()
     {
-        return User::all()->take(10);
+        return User::query();
     }
 }
